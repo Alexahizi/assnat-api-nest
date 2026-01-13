@@ -39,6 +39,7 @@ model Service {
   id_chefdeservice String?     @default("a definir")
   demandes         Demande[]
   personnels       Personnel[]
+  fichesDemande    FicheDemande[]
   direction        Direction   @relation(fields: [id_direction], references: [id_direction])
 
   @@map("services")
@@ -80,6 +81,7 @@ model Personnel {
   demandesEnCoursChef       Demande[]      @relation("ChefDemande")
   demandes                  Demande[]
   fichesConge               FicheDeConge[]
+  fichesDemande             FicheDemande[]
   notifications             Notification[]
   documents                 PersonnelDocument[]
   paies                     Paie[]
@@ -127,6 +129,7 @@ model Demande {
   service         Service?      @relation(fields: [id_service], references: [id_service])
   discussions     Discussion[]
   ficheDeConge    FicheDeConge?
+  ficheDemande    FicheDemande?
   notifications   Notification[]
 
   @@map("demandes")
@@ -204,6 +207,21 @@ model FicheDeConge {
   personnel     Personnel @relation(fields: [id_personnel], references: [id_personnel])
 
   @@map("fiches_conge")
+}
+
+model FicheDemande {
+  id_fichedemande String    @id @default(uuid())
+  url             String?   // URL du document/fichier de la fiche
+  date_creation   DateTime  @default(now())
+  date_modification DateTime?
+  id_demande      String    @unique
+  id_personnel    String
+  id_service      String?
+  demande         Demande   @relation(fields: [id_demande], references: [id_demande])
+  personnel       Personnel @relation(fields: [id_personnel], references: [id_personnel])
+  service         Service?  @relation(fields: [id_service], references: [id_service])
+
+  @@map("fiches_demande")
 }
 
 model InteractionRh {

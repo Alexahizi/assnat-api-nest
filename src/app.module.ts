@@ -8,9 +8,10 @@ import { AuthModule } from './auth/auth.module';
 import { NotificationModule } from './shared/notification/notification.module';
 import { UploaderModule } from './shared/uploader/uploader.module';
 import { ComptabiliteModule } from './comptabilite/comptabilite.module';
+import { FicheDemandeModule } from './fiche-demande/fiche-demande.module';
 
 @Module({
-  imports: [UserModule, RhModule, ChefdeserviceModule, AuthModule, NotificationModule, UploaderModule, ComptabiliteModule],
+  imports: [UserModule, RhModule, ChefdeserviceModule, AuthModule, NotificationModule, UploaderModule, ComptabiliteModule, FicheDemandeModule],
   controllers: [AppController],
   providers: [AppService],
 })
